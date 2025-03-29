@@ -64,3 +64,15 @@ def handle_login():
     access_token = create_access_token(identity = user.email)
 
     return jsonify({'id': user.id, 'access_token': access_token}), 200
+
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def handle_get_user():
+    
+    current_user_email = get_jwt_identity()
+    user = User.query.filter_by(email=current_user_email).first()
+    if user is None:
+        return jsonify({'msg': 'unauthorized user'})
+    user = user.serialize()
+
+    return jsonify(user), 200
