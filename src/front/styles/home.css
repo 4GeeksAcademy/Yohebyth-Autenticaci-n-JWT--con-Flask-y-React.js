@@ -6,6 +6,19 @@ h1, p{
     margin: 1rem;
     padding: 1rem;
 }
+h1{
+    font-size: 5rem;
+}
+
+.homebuttons{
+    display: flex;
+    justify-content:space-around;
+}
+.home-button{
+    padding: 0.7rem;
+    width: 9rem;
+    font-size: 2rem;
+}
 
 .Homeimg{
     max-width: 100%;
