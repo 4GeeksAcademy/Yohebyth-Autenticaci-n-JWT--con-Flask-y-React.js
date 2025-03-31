@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
-import { Context } from "../store/appContext";
+import React from "react";
 import { Dataform } from "../component/dataform";
+import { Link} from "react-router-dom";
 
 export const Login = () => {
-    const { store, actions } = useContext(Context);
-    const params = useParams();
 
     return (
         <div className="jumbotron">
             <h1 className="Title">Login</h1>
-            <Dataform />
+            <Dataform page={"login"}/>
+            <Link to='/private'>
+                go to private
+            </Link>
         </div>
     );
 };

@@ -12,7 +12,6 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
-
 @api.route('/signup', methods=['POST'])
 def handle_create_user():
     body = request.get_json()
@@ -63,7 +62,7 @@ def handle_get_user():
     current_user_email = get_jwt_identity()
     user = User.query.filter_by(email=current_user_email).first()
     if user is None:
-        return jsonify({'msg': 'unauthorized user'})
+        return jsonify({'msg': 'unauthorized user'}), 401
     user = user.serialize()
 
-    return jsonify(user), 200
+    return jsonify({'email': user['email']}), 200

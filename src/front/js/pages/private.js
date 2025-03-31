@@ -1,24 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import { Login } from "./login";
 
 export const Private = ()=> {
+	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-	const params = useParams();
+	const [user, setUser] = useState();
+
+	useEffect( () => {
+			actions.getUser().then(newUser => setUser(newUser));
+			console.log(user);		
+	}, [] );		 	 	
 
 	return (
-		<div className="jumbotron">
-			<h1 className="display-4">This will show the demo element</h1>
-			<img src={rigoImageUrl} />
-			<hr className="my-4" />
-
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
+		<div className="jumbotron">			
+			<h1>{user ? user.email : navigate("/login")}</h1>
 		</div>
 	);
 };

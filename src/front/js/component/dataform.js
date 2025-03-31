@@ -1,27 +1,38 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import { Link, useNavigate} from "react-router-dom";
+import { Context } from "../store/appContext";
 
 
-export const Dataform = () => {
+export const Dataform = ({page}) => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { actions} = useContext(Context);
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
 
-const handleSubmit = (e) => {
-    e.preventDefault();    
-    navigate("/login");
+const handleSubmit = async (email, password) => {
+    if (page == "signup")
+        navigate("/login");   
+    if (page == "login"){  
+        await actions.login(email, password)      
+        navigate("/private");        
+    }        
 };
 
     return (
         <div className="dataform">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={ (evt) => {
+                evt.preventDefault(); 
+                handleSubmit(email, password);
+                }}>
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required />
+                    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder = "email" onChange={(evt) => setEmail(evt.target.value)} aria-describedby="emailHelp" required />
                         <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" required />
+                    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder = "password" onChange={(evt) => setPassword(evt.target.value)} required />
                 </div>
                 <button type="submit" className="btn btn-dark button1">Enviar</button>
             </form>
