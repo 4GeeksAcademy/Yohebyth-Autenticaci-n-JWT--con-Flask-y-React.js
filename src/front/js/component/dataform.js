@@ -12,10 +12,13 @@ export const Dataform = ({page}) => {
 
 const handleSubmit = async (email, password) => {
     if (page == "signup")
+        await actions.signup(email, password)  
         navigate("/login");   
     if (page == "login"){  
-        await actions.login(email, password)      
-        navigate("/private");        
+        await actions.login(email, password)
+        actions.getUser().then(newUser => {
+            !newUser? console.log("no autorizado") : navigate("/private");;
+        });                
     }        
 };
 

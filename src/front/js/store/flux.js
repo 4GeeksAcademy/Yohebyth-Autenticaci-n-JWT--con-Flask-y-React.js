@@ -4,6 +4,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,			
 		},
 		actions: {
+
+			signup: async (email, password) => {
+				try {
+					const create = await fetch(`${process.env.BACKEND_URL}api/signup`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({
+								email,
+								password
+							})
+					});
+
+					if(!create.ok)
+						throw('Error')
+					console.log("usuario creado");
+					
+					
+				}
+				catch {
+					console.log("Error");					
+				}
+			},
+
 			login: async (email, password) => {
 				try {
 					const token = await fetch(`${process.env.BACKEND_URL}api/login`, {
@@ -50,7 +75,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch {
 					console.log('Error');					
 				}
-			},		
+			},	
+			
+			closeSession: () => {
+				localStorage.setItem('token', null)
+			}
 		}
 	};
 };
