@@ -1,5 +1,26 @@
-.dataform{
-    margin: 1rem;padding: 1rem;
+.datah1{
+    text-align: center;
 }
 
+.dataform{
+    margin: 1rem;
+    padding: 1rem;
+}
 
+.row{
+    justify-content:space-around;
+}
+
+.privateh1{
+    text-align: center;
+    font-size: calc(1em + 1vw)
+}
+
+.privateimg{
+    max-width: 100%;
+}
+
+.closebutton{
+    padding: 0.7rem;
+    max-width: 14rem;
+}

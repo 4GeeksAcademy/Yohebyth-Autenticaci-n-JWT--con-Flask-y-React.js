@@ -16,8 +16,8 @@ h1{
 }
 .home-button{
     padding: 0.7rem;
-    width: 9rem;
-    font-size: 2rem;
+    max-width: 9rem;
+    min-width: 5rem;
 }
 
 p{
@@ -27,8 +27,4 @@ p{
 
 .Homeimg{
     max-width: 70%;
-}
-
-.exito{
-    justify-content: center;
 }
